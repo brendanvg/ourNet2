@@ -90,4 +90,36 @@ app.get('/profile',
     res.render('profile', { user: req.user });
   });
 
+app.get('/home', 
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req,res){
+    var user = req.user
+    console.log(user)
+  })
+
+app.get('/signUp', function (req,res){
+  res.render('signUp')
+})
+
+app.post('/signUp2', function(req,res){
+  var records = db.users.records
+  var lastId = records[records.length -1].id
+  var newId = lastId +1 
+  console.log('doinnnn something', records, 'then', lastId, 'then2', newId)
+  var username= req.body.username
+  console.log('worked', username)
+  var body = {
+    id: newId,
+    username: req.body.username,
+    password: req.body.password,
+    displayName: req.body.username,
+    emails: [req.body.email]
+  }
+
+  records.push(body)
+  res.render('login', {
+      message:' '
+  })
+})
+
 app.listen(3000);
