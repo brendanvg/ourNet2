@@ -1,0 +1,88 @@
+<DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='startNetwork.css'/>
+
+    <script src= "./cytoscape.min.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</head>
+<body>
+	<div id='container'>
+		<div id='netLinkContent'></div>
+
+		<div id='createNetworkDiv'>
+			<p>Create New Network </p>
+			<input type='text' id ='netName'></input>
+	        <button id= 'postNewNet'>Add Network</button>
+		</div>
+
+		<button id = 'loadNets'>Load Networks </button>
+		  <div class='col-xs-9' id="cy"></div>
+
+	</div>
+
+	  <script src='bundle2.js'>
+
+// <script>
+
+// var postNewNet= document.getElementById('postNewNet')
+// postNewNet.addEventListener('click',postNewNet)
+
+// var loadNets = document.getElementById('loadNets')
+// loadNets.addEventListener('click',loadNets)
+// function postNewNet(){
+//   		var url = 'http://localhost:5003/postNewNet'
+//   		var netName=document.getElementById('netName').value
+//   		postJson(url,netName, loadNets) 
+//   	}
+  	
+//   	function loadNets(callback3){
+
+// 		var listOfGroupLinks = ""
+// 		var stream3 = hyperquest('http://localhost:5003/loadNets')
+// 		.pipe(
+// 			catS(function(data){
+// 				var x = data.toString()
+// 				var y = JSON.parse(x)
+// 				console.log('this is y from groups', y)
+
+// 				for (i = 0; i<y.length; i++){
+// 					console.log('yep',y[i])
+// 					var groupLink = '<tr><button class = "groups" id="'+y[i].key+'">'+y[i].key+'</button><br>'
+				
+// 					listOfGroupLinks += groupLink
+// 				}
+// 				var parent= document.getElementById('groupLinkContent')
+// 				parent.innerHTML=listOfGroupLinks
+// 			})
+// 		)
+// 		stream3.on('finish', function(){
+// 			console.log('its done')
+// 			var groups1 = document.getElementsByClassName('groups')
+
+// 			for(var i = 0; i < groups1.length; i++)
+//  			{
+//    				console.log(groups1.item(i));
+//    				groups1.item(i).addEventListener('click',graphSpecificGroup)
+// 			 }
+// 		})
+// 	}	
+
+//   </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='index.css'/>
+    <script src= "./cytoscape.min.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <div id = 'container'>
+
+    <input id="currentNet" value="" type="hidden">
+    <h1>LifeNet</h1>
+    <h2>We give eachother life.</h2>
+
+    <h4>Because politicians, employers, landlords, police, etc. don't love us like we love us.</h4>
+    <div id='netLinkContent'></div>
+
+
+    <button id='checkDb'>checkDb</button>
+
+    <div id='createNetworkDiv'>
+      <p>Create New Network </p>
+      <input type='text' id ='netName'></input>
+          <button id= 'postNewNet'>Add Network</button>
+    </div>
+
+    <button id = 'loadNets'>Load Networks </button>
+      <div class='col-xs-9' id="cy"></div>
+
+   
+<div class= 'row'>
+
+  <div class= 'col-xs-3'>
+    <div data-role="main" class="ui-content">
+      <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all ui-icon-check ui-btn-icon-left">Add Node</a>
+      <div data-role="popup" id="myPopup" class="ui-content" style="min-width:250px;">
+        
+        <p>Node ID</p>
+        <input id='nodeName' type='text' placeholder='Node Name'required></input>
+        <input id='nodeNetworks' type='text' placeholder='Node Network' required></input>
+        <input id='nodeGroup' type='text' placeholder='Node Group' required></input>
+        <button id= 'postJson1'>Add Node</button>
+
+      <script type='text/javascript'>
+        $('#postJson1').on('click', function(event){
+          event.preventDefault()
+        })
+      </script>
+
+
+http:localhost/post
+
+      </div>
+    </div>
+
+    <button id='graphAllNodes2'>Graph All Nodes</button> 
+    <button id='loadEdges2'>Load Edges</button> 
+    <button id='savePositions'>Save Positions</button>
+    <button id = 'clear'>Clear Window </button>
+    <button id = 'loadGroups'>Load Groups </button>
+    <a href="chat.html"><button id= 'enterChat'>Enter Chat</button></a>
+  
+    <div id='groupLinkContent'></div>
+    <div id-'netLinkContent'></div>
+
+  </div>
+
+<!--   <div class='col-xs-9' id="cy"></div>
+ -->  </div>
+
+</div>
+
+  </div>
+
+
+  <script src='bundle.js'>
+  </script>
+  
+
+  </body>
+</html>

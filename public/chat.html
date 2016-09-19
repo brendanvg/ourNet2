@@ -1,0 +1,20 @@
+<html>
+<head>
+	<title> Hello World </title>
+	<script src= '/socket.io/socket.io.js'></script>
+	<script>
+		var socket = io.connect('http://localhost:5003')
+		socket.on('news',function(data){
+			document.getElementById('chat').innerHTML += data.data +'</br>'
+		})
+		function send() {
+			socket.emit('news',{data:document.getElementById('msg').value})
+		}
+	</script>
+</head>
+<body>
+	<h1> Hello World</h1>
+	<div id='chat'></div>
+	<input id='msg' type='text'>
+	<input type='button' value="send" onClick='send()'>
+</body>
