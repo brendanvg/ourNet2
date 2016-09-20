@@ -30,7 +30,6 @@ var server = app.listen(5003, function(){
 //     edges: {in: [inEdge1,inEdge2,.....], out: [outEdge]},
 //     edge: [[inEdge, inEdge],[outEdge,outEdge]
 //}]
-//
 
 // Configure view engine to render EJS templates.
 app.set('views', __dirname + '/views')
