@@ -1,0 +1,53 @@
+[33mcommit 288ac67347cfa8066b0b6bf0a8c511584fcefb72[m
+Author: user <brendanvg10@gmail.com>
+Date:   Mon Sep 19 20:20:18 2016 -0700
+
+    getting there...having trouble with post /addNet in server.js
+
+[33mcommit 9f834c789a16dd2f1906d8d063ca790d688ebed3[m
+Author: user <brendanvg10@gmail.com>
+Date:   Mon Sep 19 17:01:11 2016 -0700
+
+    what we need to do is create a db with key the req.user and the value which networks they can access
+
+[33mcommit 6b7f59e8fea65c5c290dd2d16f775ebc9b51cb72[m
+Author: user <brendanvg10@gmail.com>
+Date:   Mon Sep 19 16:58:46 2016 -0700
+
+    the integration seems to be working...now we just need to figure out how to serve up specific users data to the one logged in
+
+[33mcommit deb5913b1d9cdf58e68279271a618b07e4f26e6b[m
+Author: user <brendanvg10@gmail.com>
+Date:   Mon Sep 19 15:43:54 2016 -0700
+
+    before trying to mush ourNet2 with lifeNet....just in case i break anything
+
+[33mcommit f138dfc8c374061121706929b6290c60b65df559[m
+Author: brendanvg <brendanvg10@gmail.com>
+Date:   Wed Aug 31 20:27:21 2016 -0400
+
+    everything working, also account adding...now just need to combine it with lifeNet and then utilize the handy dandy .ensureLoggedIn() function server side and the req.user to make sure that people who are logged in get access only to their network
+
+[33mcommit 125e166444f0658ce08cc5e1db2c57f9a9bd92ac[m
+Author: Jared Hanson <jaredhanson@gmail.com>
+Date:   Thu Aug 20 14:16:24 2015 -0700
+
+    Set resave and saveUninitialized to false.
+
+[33mcommit 594f9eb631babb7861a70f5d81980263ce832864[m
+Author: Jared Hanson <jaredhanson@gmail.com>
+Date:   Sat Aug 15 12:09:19 2015 -0700
+
+    Update README.
+
+[33mcommit 5d171de11a134d4e24b43022e20265a3ed6d6b38[m
+Author: Jared Hanson <jaredhanson@gmail.com>
+Date:   Sat Aug 15 12:08:37 2015 -0700
+
+    Update README.
+
+[33mcommit e5faef8d688bc154816efba361a2a27e7965641a[m
+Author: Jared Hanson <jaredhanson@gmail.com>
+Date:   Sat Aug 15 12:07:19 2015 -0700
+
+    Add example.

@@ -48,7 +48,7 @@ var postJson1=document.getElementById("postJson1")
 postJson1.addEventListener("click", lnf.createNewNode)
 
 var addNet1 = document.getElementById('addNet1')
-addNet1.addEventListener('click', lnf.addNet)
+addNet1.addEventListener('click', lnf.addNet, lnf.loadNets)
 
 // var enterChat = document.getElementById('enterChat')
 // enterChat.addEventListener('click', lnf.enterChat)
@@ -240,9 +240,9 @@ function initialize(){
 
   	function addNet(){
   		console.log('addNet called in LNF')
-  		var netName = document.getElementById('netName')
-  		var netDescription = document.getElementById('netDescription')
-  		var invitePeople = document.getElementById('invitePeople')
+  		var netName = document.getElementById('netName').value
+  		var netDescription = document.getElementById('netDescription').value
+  		var invitePeople = document.getElementById('invitePeople').value
   		var body = {netName: netName, netDescription: netDescription, invitePeople:invitePeople}
   		var url= 'http://localhost:5003/addNet'
   		postJson(url, body, function (err, result) {
@@ -254,6 +254,33 @@ function initialize(){
   	}
   	
   	function loadNets(/*callback3*/){
+
+  		/*var netsValue = hyperquest('http://localhost:5003/loadNets')
+  		console.log('myyyy netsValue: ', netsValue)
+		var y = JSON.parse(netsValue)
+
+		console.log('yyyyy: ', y)
+		for (i = 0; i<y.length; i++){
+			console.log('yep',y[i])
+			var groupLink = '<tr><button class = "nets" id="'+y[i]+'">'+y[i]+'</button><br>'
+		
+			listOfGroupLinks += groupLink
+			document.getElementById('currentNet').value = y[i]
+		}
+		var parent= document.getElementById('netLinkContent')
+		parent.innerHTML=listOfGroupLinks
+
+
+		var nets1 = document.getElementsByClassName('nets')
+
+		for(var i = 0; i < nets1.length; i++)
+			{
+				console.log('loadnetshmmm', nets1.item(i));
+				nets1.item(i).addEventListener('click',graphSpecificNet)
+		 }
+	}*/
+
+
 
 		var listOfGroupLinks = ""
 		var stream3 = hyperquest('http://localhost:5003/loadNets')

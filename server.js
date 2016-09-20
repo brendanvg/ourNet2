@@ -168,7 +168,9 @@ app.post('/signUp2', function(req,res){
   }
 
   records.push(body)
-  accessDb.put(username, function(err){
+  var emptyArray = []
+  console.log('yuuuuup', typeof emptyArray, emptyArray)
+  accessDb.put(username, emptyArray, function(err){
     if (err) return console.log('oops', err)
   })
   res.render('login', {
@@ -276,13 +278,15 @@ app.get('/loadNets3', cors(corsOption), function (req,res,next){
 })
 
 app.get('/loadNets', cors(corsOption), function (req,res,next){
-  var currentUser= req.user
+  var currentUser= req.user.username
   console.log('I am: ', currentUser)
 
-  var stream = db.get(currentUser, function(err, value){
-    console.log('woooot!', value)
-    res.end(value)
-  })
+  var stream = accessDb.createReadStream({gt: currentUser, limit:1})
+    collect(stream, (err,data) => {
+    res.writeHead(200, {'content-type': 'application/JSON'})
+      res.end(JSON.stringify(data))
+    }) 
+  
   /*var finalDataArray= []
   var stream = db.createKeyStream() 
   .on('data', function(data){
@@ -362,14 +366,17 @@ app.post('/addNet', cors(corsOption), function(req,res,next){
     var invitePeople = params.invitePeople
     var currentUser= req.user.username
     console.log('this is my user', currentUser)
+    console.log('nettNammmmee', netName, netName.netName, netName.toString(), JSON.stringify(netName))
     accessDb.get(currentUser, function(err,value){
-      console.log('this is my value', value)
-      var updatedValue = value.push(netName)
-      accessDb.push(currentUser, updatedValue, function(err){
+      console.log('this is my value', value, typeof value)
+      var updatedValue = value.concat(':',netName)
+      console.log('yyyyy', updatedValue)
+      accessDb.put(currentUser, updatedValue, function(err){
         if (err) {return console.log('uhhoh', err)}
           else {'updated that!! ', updatedValue}
       })
     })
+    res.end()
   })
 })
 
