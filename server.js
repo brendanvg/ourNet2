@@ -18,7 +18,7 @@ var server = app.listen(5003, function(){
   console.log('listening on port 5003')
 })
 var path = require('path')
-
+var recordsDb = levelup('./recordsDb', {valueEncoding: 'json'})
 
 //BETTER DATA STRUCTURE 
 //key: network, 
@@ -124,6 +124,7 @@ app.post('/login',
   passport.authenticate('local', { failureRedirect: '/login' }),
   function(req, res) {
 /*    res.redirect('/');
+
 */
 res.sendFile(path.join(__dirname, '/public', 'index.html'));
 });
@@ -176,6 +177,44 @@ app.post('/signUp2', function(req,res){
   res.render('login', {
       message:' '
   })
+})
+
+app.post('/signUp3', function(req,res){
+  
+  var idCount = 0
+  var fullRecordsArray = []
+  var stream = recordsDb.createValueStream()
+    .on('data', function(data){
+    console.log('hhhoooooo', data)
+    idCount += 1
+    fullRecordsArray.push(data)
+    })
+    .on('error', function (err) {
+      console.log('Oh my!', err)
+    })
+    .on('close', function () {
+      console.log('Stream closed')
+    })
+    .on('end', function () {
+      console.log('Stream ended')
+    })
+  var username= req.body.username
+  var body = {
+    id: idCount,
+    username: req.body.username,
+    password: req.body.password,
+    displayName: req.body.username,
+    emails: [req.body.email]
+  }
+  var finalRecordsArray = fullRecordsArray.push(body)
+  recordsDb.put('records', finalRecordsArray, function(err){})
+  res.render('login', {
+      message:' '
+  })
+})
+
+app.get('/loadRecords', function(req,res,next){
+
 })
 
 app.get('/checkDb/:net',function(req,res,next){
