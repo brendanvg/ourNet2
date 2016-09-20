@@ -34,10 +34,11 @@
     <button id='checkDb'>checkDb</button>
 
     <div id='createNetworkDiv'>
-      <p>Create New Network </p>
-      <input type='text' id ='netName'></input>
           <button id= 'postNewNet'>Add Network</button>
     </div>
+
+    
+
 
     <button id = 'loadNets'>Load Networks </button>
       <div class='col-xs-9' id="cy"></div>
@@ -46,6 +47,27 @@
 <div class= 'row'>
 
   <div class= 'col-xs-3'>
+
+    <div data-role="main" class="ui-content">
+      <a href="#myPopup1" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all ui-icon-check ui-btn-icon-left">Add Network</a>
+      <div data-role="popup" id="myPopup1" class="ui-content" style="min-width:250px;">
+        
+        <p>Node ID</p>
+        <input id='netName' type='text' placeholder='Net Name'required></input>
+        <input id='netDescription' type='text' placeholder='Net Description' required></input>
+        <input id='invitePeople' type='text' placeholder='Invite People' required></input>
+        <button id= 'addNet1'>Add Net</button>
+
+      <script type='text/javascript'>
+        $('#addNet1').on('click', function(event){
+          event.preventDefault()
+        })
+      </script>
+
+      </div>
+    </div>
+
+
     <div data-role="main" class="ui-content">
       <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all ui-icon-check ui-btn-icon-left">Add Node</a>
       <div data-role="popup" id="myPopup" class="ui-content" style="min-width:250px;">
@@ -61,10 +83,6 @@
           event.preventDefault()
         })
       </script>
-
-
-http:localhost/post
-
       </div>
     </div>
 

@@ -47,6 +47,9 @@ savePositions.addEventListener('click', lnf.savePositions)
 var postJson1=document.getElementById("postJson1")
 postJson1.addEventListener("click", lnf.createNewNode)
 
+var addNet1 = document.getElementById('addNet1')
+addNet1.addEventListener('click', lnf.addNet)
+
 // var enterChat = document.getElementById('enterChat')
 // enterChat.addEventListener('click', lnf.enterChat)
 
@@ -218,7 +221,7 @@ function initialize(){
 	var secondNode = {}*/
 
 	return {
-		postNewNet: postNewNet,
+		addNet: addNet,
 		loadNets: loadNets,
 		graphAllNodes: graphAllNodes,
 		loadEdges: loadEdges,
@@ -235,10 +238,19 @@ function initialize(){
   	}
 
 
-  	function postNewNet(){
+  	function addNet(){
+  		console.log('addNet called in LNF')
+  		var netName = document.getElementById('netName')
+  		var netDescription = document.getElementById('netDescription')
+  		var invitePeople = document.getElementById('invitePeople')
+  		var body = {netName: netName, netDescription: netDescription, invitePeople:invitePeople}
+  		var url= 'http://localhost:5003/addNet'
+  		postJson(url, body, function (err, result) {
+		})
   		// var url = 'http://localhost:5003/addNet'
   		// var netName=document.getElementById('nodeNetworks').value
   		// postJson(url,netName, loadNets) 
+  		loadNets()
   	}
   	
   	function loadNets(/*callback3*/){

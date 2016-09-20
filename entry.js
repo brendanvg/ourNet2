@@ -46,6 +46,9 @@ savePositions.addEventListener('click', lnf.savePositions)
 var postJson1=document.getElementById("postJson1")
 postJson1.addEventListener("click", lnf.createNewNode)
 
+var addNet1 = document.getElementById('addNet1')
+addNet1.addEventListener('click', lnf.addNet)
+
 // var enterChat = document.getElementById('enterChat')
 // enterChat.addEventListener('click', lnf.enterChat)
 

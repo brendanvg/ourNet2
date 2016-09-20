@@ -13,9 +13,11 @@ var h = require('hyperscript')
 var hyperstream = require('hyperstream')
 var fs = require('fs')
 var app = express();
+var accessDb = levelup('./accessDb')
 var server = app.listen(5003, function(){
   console.log('listening on port 5003')
 })
+var path = require('path')
 
 
 //BETTER DATA STRUCTURE 
@@ -121,8 +123,10 @@ app.get('/login',
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
-  });
+/*    res.redirect('/');
+*/
+res.sendFile(path.join(__dirname, '/public', 'index.html'));
+});
   
 app.get('/logout',
   function(req, res){
@@ -141,6 +145,7 @@ app.get('/home',
   function(req,res){
     var user = req.user
     console.log(user)
+res.sendFile(path.join(__dirname, '/public', 'index.html'));
   })
 
 app.get('/signUp', function (req,res){
@@ -163,6 +168,9 @@ app.post('/signUp2', function(req,res){
   }
 
   records.push(body)
+  accessDb.put(username, function(err){
+    if (err) return console.log('oops', err)
+  })
   res.render('login', {
       message:' '
   })
@@ -268,8 +276,14 @@ app.get('/loadNets3', cors(corsOption), function (req,res,next){
 })
 
 app.get('/loadNets', cors(corsOption), function (req,res,next){
-  
-  var finalDataArray= []
+  var currentUser= req.user
+  console.log('I am: ', currentUser)
+
+  var stream = db.get(currentUser, function(err, value){
+    console.log('woooot!', value)
+    res.end(value)
+  })
+  /*var finalDataArray= []
   var stream = db.createKeyStream() 
   .on('data', function(data){
     console.log('aaaa',data)
@@ -288,7 +302,7 @@ app.get('/loadNets', cors(corsOption), function (req,res,next){
     
     res.end(JSON.stringify(finalDataArray))
 
-    })
+    })*/
 })
 
 
@@ -317,7 +331,7 @@ app.post('/addGroup', cors(corsOption), function (req,res,next){
   res.end()
 })
 
-app.post('/addNet', cors(corsOption), function (req,res,next){
+/*app.post('/addNet', cors(corsOption), function (req,res,next){
   body(req,res,function(err,params){
     var netName= params.netName
 
@@ -339,6 +353,24 @@ app.post('/addNet', cors(corsOption), function (req,res,next){
     })
   })
   res.end()
+})*/
+
+app.post('/addNet', cors(corsOption), function(req,res,next){
+  body (req,res, function(err,params){
+    var netName = params.netName
+    var description = params.netDescription
+    var invitePeople = params.invitePeople
+    var currentUser= req.user.username
+    console.log('this is my user', currentUser)
+    accessDb.get(currentUser, function(err,value){
+      console.log('this is my value', value)
+      var updatedValue = value.push(netName)
+      accessDb.push(currentUser, updatedValue, function(err){
+        if (err) {return console.log('uhhoh', err)}
+          else {'updated that!! ', updatedValue}
+      })
+    })
+  })
 })
 
 

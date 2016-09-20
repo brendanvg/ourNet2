@@ -16,7 +16,7 @@ function initialize(){
 	var secondNode = {}*/
 
 	return {
-		postNewNet: postNewNet,
+		addNet: addNet,
 		loadNets: loadNets,
 		graphAllNodes: graphAllNodes,
 		loadEdges: loadEdges,
@@ -33,10 +33,19 @@ function initialize(){
   	}
 
 
-  	function postNewNet(){
+  	function addNet(){
+  		console.log('addNet called in LNF')
+  		var netName = document.getElementById('netName')
+  		var netDescription = document.getElementById('netDescription')
+  		var invitePeople = document.getElementById('invitePeople')
+  		var body = {netName: netName, netDescription: netDescription, invitePeople:invitePeople}
+  		var url= 'http://localhost:5003/addNet'
+  		postJson(url, body, function (err, result) {
+		})
   		// var url = 'http://localhost:5003/addNet'
   		// var netName=document.getElementById('nodeNetworks').value
   		// postJson(url,netName, loadNets) 
+  		loadNets()
   	}
   	
   	function loadNets(/*callback3*/){
