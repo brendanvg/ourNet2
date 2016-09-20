@@ -88,7 +88,7 @@ function tapOnNodes () {
     //second click
     if (nClicked) {
       nClicked = false
-  	  // console.log('byee')
+  	  // console.log('byee') you know...
       secondNode = evt.cyTarget
       var firstNodeId= firstNode.id()
       var secondNodeId = secondNode.id()
