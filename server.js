@@ -18,7 +18,7 @@ var server = app.listen(5003, function(){
   console.log('listening on port 5003')
 })
 var path = require('path')
-var recordsDb = levelup('./recordsDb', {valueEncoding: 'json'})
+var recordsDb = levelup('./recordsDb6', {valueEncoding: 'json'})
 
 //BETTER DATA STRUCTURE 
 //key: network, 
@@ -180,41 +180,104 @@ app.post('/signUp2', function(req,res){
 })
 
 app.post('/signUp3', function(req,res){
+    var username1 = req.body.username
+    var password1 = req.body.password
+    var email1 = req.body.email
+    var idCount = 0
+    var body = [{
+      id: idCount,
+      username: username1,
+      password: password1,
+      emails: email1
+    }]
+
+    console.log('hi1')
+
+    recordsDb.get('records', function(err,value){
+      if (err) {
+        console.log('hi2')
+        if(err.notFound){
+          console.log('hi3')
+          recordsDb.put('records', body, function(err,value){
+            console.log('hi4')
+          })
+        }
+        else {
+          console.log('hi5')
+          var arrayOfRecords = value
+          arrayOfRecords.push(body)
+          recordsDb.put('records', arrayOfRecords, function(err,value){
+            console.log('hi6')
+            if (err){
+              console.log('hi7')
+            }
+            else{
+              console.log('hi8')
+              db.get('records', function(err,value){
+                console.log('big addRecord check!!!!!', value)
+              })
+            }
+
+          })
+          
+        }
+      }
+
+    })
+
+
+
+/*    var stream = recordsDb.createValueStream()
+      .on('data', function(data){
+                  
+      console.log('hhhoooooo', data)
+      fullRecordsArray.push(data)
+      console.log('done!', fullRecordsArray)
+      idCount += 1
+      })
+      .on('error', function (err) {
+        console.log('Oh my!', err)
+      })
+      .on('close', function () {
+        console.log('Stream closed')
+        
+    var body = [{
+      id: idCount,
+      username: username1,
+      password: password1,
+      emails: email1
+    }]
+
+    console.log('orange', body)
+    console.log('pear', fullRecordsArray)
+    var finalRecordsArray = fullRecordsArray.push(body)
+    console.log('apple', finalRecordsArray)
+    recordsDb.put('records', body, function(err){})
+    */
+  /*  res.render('login', {
+        message:' '
+    })
+    */
+  /*  
   
-  var idCount = 0
-  var fullRecordsArray = []
-  var stream = recordsDb.createValueStream()
-    .on('data', function(data){
-    console.log('hhhoooooo', data)
-    idCount += 1
-    fullRecordsArray.push(data)
-    })
-    .on('error', function (err) {
-      console.log('Oh my!', err)
-    })
-    .on('close', function () {
-      console.log('Stream closed')
-    })
-    .on('end', function () {
-      console.log('Stream ended')
-    })
-  var username= req.body.username
-  var body = {
-    id: idCount,
-    username: req.body.username,
-    password: req.body.password,
-    displayName: req.body.username,
-    emails: [req.body.email]
-  }
-  var finalRecordsArray = fullRecordsArray.push(body)
-  recordsDb.put('records', finalRecordsArray, function(err){})
-  res.render('login', {
-      message:' '
-  })
+  res.end()
+
+      })
+      .on('end', function () {
+        console.log('Stream ended')
+      
+
+      })
+*/
+    
 })
 
 app.get('/loadRecords', function(req,res,next){
-
+   var stream = recordsDb.createReadStream()
+    collect(stream, (err,data) => {
+    res.writeHead(200, {'content-type': 'application/JSON'})
+      res.end(JSON.stringify(data))
+    }) 
 })
 
 app.get('/checkDb/:net',function(req,res,next){

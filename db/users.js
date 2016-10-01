@@ -10,15 +10,16 @@ var records = [
 
 
 function loadRecords() {
+  console.log('at least called loadRecords')
   hyperquest('http://localhost:5003/loadRecords')
   .pipe(
     catS(function(data){
       var x = data.toString()
       var y = JSON.parse(x)
       console.log('this is recordssss: ', y)
+      return y
     })
   )
-  return y
 }
 
 exports.findById = function(id, cb) {
@@ -35,7 +36,8 @@ exports.findById = function(id, cb) {
 
 exports.findByUsername = function(username, cb) {
   var records = loadRecords() 
-  process.nextTick(function() {
+  console.log('woooot,records: ', records)
+ /* process.nextTick(function() {
     for (var i = 0, len = records.length; i < len; i++) {
       var record = records[i];
       if (record.username === username) {
@@ -43,5 +45,15 @@ exports.findByUsername = function(username, cb) {
       }
     }
     return cb(null, null);
-  });
+  });*/
+
+  hyperquest('http://localhost:5003/loadRecords')
+  .pipe(
+    catS(function(data){
+      var x = data.toString()
+      var y = JSON.parse(x)
+      console.log('this is recordssss: ', y)
+      return y
+    })
+  )
 }
